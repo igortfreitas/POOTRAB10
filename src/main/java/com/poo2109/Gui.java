@@ -111,4 +111,8 @@ public class Gui extends JFrame {
     public void excluir() {
         if (dlm.size() > 0) dlm.remove(list.getSelectedIndex());
     }
+
+    public static void main(String[] args) {
+        new Gui();
+    }
 }
