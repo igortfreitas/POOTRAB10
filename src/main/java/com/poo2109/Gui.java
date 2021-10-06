@@ -1,5 +1,7 @@
 package com.poo2109;
 
+// Integrantes : Igor Tamagnoni de Freitas e Kaua Victor
+
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
@@ -7,8 +9,7 @@ import java.util.regex.Pattern;
 
 public class Gui extends JFrame {
 
-    protected ArrayList<Disciplina> disciplinaArrayList = new ArrayList<>();
-
+    private ArrayList<Disciplina> disciplinaArrayList = new ArrayList<>();
     private final JPanel panel;
     private JButton inserir, alterar, consultar, excluir;
     private JTextField textField1, textField2, textField3;
@@ -18,10 +19,16 @@ public class Gui extends JFrame {
 
     public Gui() {
         super("Trabalho");
+
+        ImageIcon imageIcon = new ImageIcon("ifescol.png");
+        setIconImage(imageIcon.getImage());
+
         panel = new JPanel(new FlowLayout());
         panel.setForeground(new Color(-12961222));
         panel.setBackground(new Color(-12961222));
+
         list = new JList<>(dlm);
+
         inserir = new JButton("Inserir");
         inserir.setFocusable(false);
         alterar = new JButton("Alterar");
@@ -71,7 +78,7 @@ public class Gui extends JFrame {
 
     public void inserir() {
         Pattern p1 = Pattern.compile("[0-9]+$");
-        Pattern p2 = Pattern.compile("[a-zA-Z]+$");
+        Pattern p2 = Pattern.compile("^[a-zA-Z ]+$");
 
         if (textField1.getText().matches(p1.pattern()) && textField2.getText().matches(p2.pattern()) && textField3.getText().matches(p1.pattern())) {
             dlm.addElement(new Disciplina(Integer.parseInt(textField1.getText()), textField2.getText(), Integer.parseInt(textField3.getText())));
@@ -93,9 +100,12 @@ public class Gui extends JFrame {
     }
 
     public void consultar() {
-        textField1.setText(String.valueOf(list.getSelectedValue().getId()));
-        textField2.setText(list.getSelectedValue().getNome());
-        textField3.setText(String.valueOf(list.getSelectedValue().getCargaHoraria()));
+        JOptionPane.showMessageDialog(null,
+                "ID: " + list.getSelectedValue().getId() + "\n" +
+                        "Nome: "+ list.getSelectedValue().getNome() + "\n" +
+                        "Carga Horária: " + list.getSelectedValue().getCargaHoraria()
+                ,"Consulta Dados",
+                JOptionPane.INFORMATION_MESSAGE);
     }
 
     public void excluir() {
